@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!--make the website work on all devices and screen res -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css"> <!--take care of all styling needs and browser differences -->
+<head>
+  <style>
+
+  ul {
+    list-style-type: none;
+    margin-left: 300px;
+    margin-right: 0px;
+    margin-top: 0px;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #cbcbcb;
+    background-color: #e4e4e4;
+  }
+  li {
+    float:left;
+  }
+
+  li a{
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active){
+    background-color: #cbcbcb;
+  }
+
+  .active {
+    background-color: #ffc9c9;
+  }
+
+
+  </style>
+</head>
+<body>
+
+  <!--- Navigation bar -->
+
+  <ul>
+    <li><a href="machines">Machines</a></li>
+    <li><a href="history">History</a></li>
+    <li><a href="students">Students</a></li>
+    <li style = "float:right"><a class="active" href="about">About</a></li>
+  </ul>
+
+<!--- image logo ----->
+
+<img src="http://localhost:8080/Senior Desion/img/makers-logo.png" alt="home">
+
+
+
+</body>
+</html>
