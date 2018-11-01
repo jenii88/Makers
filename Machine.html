@@ -6,30 +6,34 @@
 	<link rel="stylesheet" href="style.css"
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<script src="scripts.js">
+</script>
+
+</head>
 
 
 <body>
 
 <!-- Header -->
 <header>
-  <h2>Machine</h2>
+  <img src="https://www.uta.edu/_templates/_images/responsive/uta-logo-main.png" alt="home">
 </header>
 
 
 <!-- Navbar -->
 <ul>
-  <li><a class="active" href="#home">Home</a></li>
-  <li><a href=“#students”>Students</a></li>
-  <li><a href=“#machine”>Machines</a></li>
-  <li><a href=“#history”>History</a></li>
+  <li><a href="https://www.uta.edu/" >Home</a></li>
+  <li><a href="https://www.uta.edu/">Students</a></li>
+  <li><a href=“https://www.uta.edu/>Machines</a></li>
+  <li><a href=“https://www.uta.edu/>History</a></li>
 </ul>
 
 <!-- Table -->
 
 <table>
 <h3>Machines in Use </h3>
-<button class="btn">Add Machine</button>
-<button class="btn">Remove Machine</button>
+<button class="btn" onclick="addMachine()">Add Machine</button>
+<button class="btn" onclick="removeMachine()">Remove Machine</button>
   <tr>
     <th>Machine</th>
     <th>Machine ID#</th>
@@ -60,6 +64,7 @@
 <footer>
    <h3>UTA MakerSpace </h3>
 </footer>
+
 
 
 
