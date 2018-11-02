@@ -17,12 +17,12 @@ $result = mysqli_query($conn, $query);
    <meta charset="UTF-8">
 	<title>Add/Remove Students</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.18.0/jquery.validate.min.js" ></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="student.css">
-
+  <script src="newStudent.js"></script>
 
 
 
@@ -132,7 +132,7 @@ $result = mysqli_query($conn, $query);
      </select>
      <br />
      
-     <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+     <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" onclick="myFunction()" />
      <span id="error_message" class="text-danger"></span>  
      <span id="success_message" class="text-success"></span>
     </form>
@@ -179,7 +179,7 @@ $result = mysqli_query($conn, $query);
 
 
 
-<script>  
+<!-- <script>  
 $(document).ready(function(){
    $('#insert_form').on("submit",function(event){ 
     event.preventDefault();  
@@ -220,5 +220,5 @@ $(document).ready(function(){
  });
 });
 
-</script> 
+</script>  -->
 

@@ -24,7 +24,7 @@
 	
 	if(isset($_POST['ID'])){
 
-	 $query = "INSERT INTO student (ID,Name,Equipment) VALUES ('$ID2','$name2','$equipment2')" ;
+	 $query = "DELETE FROM student (ID,Name,Equipment) WHERE ('$ID2','$name2','$equipment2')" ;
 
 	 if (($ID2 != NULL) && (strlen($name2) != 0) && (strlen($equipment2) != 0))
 	{
@@ -33,17 +33,7 @@
 		
 	}
 
-	// if(mysqli_query($conn,$query))
-	// {
-	// 	// $output .= '<label class="text-success">Data Inserted</label>';
-	// 	echo "Data Inserted";
-	
-	// }
-	// else{
-	// 	echo "Failed";
-	// }
  
 }
- header("refresh:.1;url=newStudent.php");
+ header("refresh:1;url=newStudent.php");
 ?>
-
