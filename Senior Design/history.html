@@ -36,7 +36,7 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
+    width: 50%;
     border: 1px solid #ddd;
 }
 
@@ -48,82 +48,6 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 /* ---end table ---*/
-
-/* -------- modal for history table------------ */
-
-body {font-family: Arial, Helvetica, sans-serif;}
-
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
-
-/* Modal Content */
-.modal-content {
-    position: relative;
-    background-color: #fefefe;
-    margin: auto;
-    padding: 0;
-    border: 3px solid #888;
-    width: 80%;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-
-/* Add Animation */
-@-webkit-keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-@keyframes animatetop {
-    from {top:-300px; opacity:0}
-    to {top:0; opacity:1}
-}
-
-/* The Close Button */
-.close {
-    color: white;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-header {
-    padding: 2px 16px;
-    background-color: #f4a300;
-    color: white;
-}
-
-.modal-body {padding: 2px 16px;}
-
-.modal-footer {
-    padding: 2px 16px;
-    background-color: #f4a300;
-    color: white;
-}
-
-/* ---------- modal for history table ENDS ------------- */
 
 
 
@@ -144,33 +68,52 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 
 <!--- table ----->
-<h2>Histroy Table</h2>
+<?php
+echo "<table style='border: solid 1px black;'>";
+echo "<tr><th>Machine ID</th><th>Machine Name</th><th>Station</th></tr>";
 
-<div style="overflow-x:auto;">
-  <table>
-    <tr>
-      <th>Machine Name</th>
-      <th>Machine ID</th>
-      <th>Lab Room</th>
-    </tr>
-    <tr>
-      <!-- Trigger/Open The Modal -->
-      <td><button type = "button" class="btn btn-default" id = "myBtn">3D Printers</button></td>
-      <td># 12345</td>
-      <td>#  123</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-  </table>
-</div>
+class TableRows extends RecursiveIteratorIterator {
+    function __construct($it) {
+        parent::__construct($it, self::LEAVES_ONLY);
+    }
+
+    function current() {
+        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
+    }
+
+    function beginChildren() {
+        echo "<tr>";
+    }
+
+    function endChildren() {
+        echo "</tr>" . "\n";
+    }
+}
+
+$servername = "localhost";
+$username = "root";
+$password = "Kimilkai88";
+$dbname = "senior_design";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT Tool_ID, Tool_Name, station FROM tools");
+    $stmt->execute();
+
+    // set the resulting array to associative
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
+        echo $v;
+    }
+}
+catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+$conn = null;
+echo "</table>";
+?>
 
 
 <!--- end table --->
@@ -252,6 +195,10 @@ window.onclick = function(event) {
 </script>
 
 <!-- modal ends here -->
+<?php
+
+
+?>
 
 
 
