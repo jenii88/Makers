@@ -2,8 +2,11 @@
 <html>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"> <!--make the website work on all devices and screen res -->
+<meta name="viewport" "content="width=device-width, "initial-scale=1"> <!--make the website work on all devices and screen res -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css"> <!--take care of all styling needs and browser differences -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <head>
   <style>
 
@@ -28,30 +31,81 @@
     padding: 14px 16px;
     text-decoration: none;
   }
+/* table */
+<style type="text/css">
+		body {
+			font-size: 15px;
+			color: #343d44;
+			font-family: "segoe-ui", "open-sans", tahoma, arial;
+			padding: 0;
+			margin: 0;
+		}
+		table {
+      margin-top: 20px;
+      margin-left:70px;
+			font-family: "Lucida Sans Unicode", "Lucida Grande", "Segoe Ui";
+			font-size: 12px;
+		}
 
+		h1 {
+			margin: 25px ;
+			text-align: center;
+			text-transform: uppercase;
+			font-size: 17px;
+		}
 
+		table td {
+			transition: all .5s;
+		}
 
-/*  table --- */
+		/* Table */
+		.data-table {
+			border-collapse: collapse;
+			font-size: 14px;
+			min-width: 500px;
+		}
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 50%;
-    border: 1px solid #ddd;
-}
+		.data-table th,
+		.data-table td {
+			border: 1px solid #e1edff;
+			padding: 7px 17px;
+		}
+		.data-table caption {
+			margin: 7px;
+		}
 
-th, td {
-    text-align: left;
-    padding: 8px;
-}
+		/* Table Header */
+		.data-table thead th {
+			background-color: #32a1ff;
+			color: #FFFFFF;
+			border-color: #3a83c1 !important;
+			text-transform: uppercase;
+		}
 
-tr:nth-child(even){background-color: #f2f2f2}
+		/* Table Body */
+		.data-table tbody td {
+			color: #353535;
+		}
+		.data-table tbody td:first-child,
+		.data-table tbody td:nth-child(4),
+		.data-table tbody td:last-child {
+			text-align: center;
+		}
 
-/* ---end table ---*/
+		.data-table tbody tr:nth-child(odd) td {
+			background-color: #c6e6ff;
+		}
+		.data-table tbody tr:hover td {
+			background-color: #c6e6ff;
+			border-color: #c6e6ff;
+		}
+
+	</style>
 
 
 
   </style>
+
 </head>
 
 <body>
@@ -69,137 +123,116 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 <!--- table ----->
 <?php
-echo "<table style='border: solid 1px black;'>";
-echo "<tr><th>Machine ID</th><th>Machine Name</th><th>Station</th></tr>";
 
-class TableRows extends RecursiveIteratorIterator {
-    function __construct($it) {
-        parent::__construct($it, self::LEAVES_ONLY);
-    }
+//connect to SQLiteDatabase
 
-    function current() {
-        return "<td style='width: 150px; border: 1px solid black;'>" . parent::current(). "</td>";
-    }
 
-    function beginChildren() {
-        echo "<tr>";
-    }
+$conn = mysqli_connect("localhost", "root", "Kimilkai88", "makerssquad");
 
-    function endChildren() {
-        echo "</tr>" . "\n";
-    }
+if(!$conn) {
+  echo "Error: Unable to connect to MySQL." . PHP_EOL;
+  echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+  echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+  exit;
 }
+#echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+#echo "Host information: " . mysqli_get_host_info($conn) . PHP_EOL;
 
-$servername = "localhost";
-$username = "root";
-$password = "Kimilkai88";
-$dbname = "senior_design";
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $stmt = $conn->prepare("SELECT Tool_ID, Tool_Name, station FROM tools");
-    $stmt->execute();
-
-    // set the resulting array to associative
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
-    foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) {
-        echo $v;
-    }
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$conn = null;
-echo "</table>";
+$sql = "SELECT * FROM Tool";
+$result = $conn->query($sql);
 ?>
+<table class = "data-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Lab</th>
+      <th>Expand</th>
+    </tr>
+  </thead>
+  <tbody>
+      <?php
+        $no=0;
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+          $no++;
+            echo "<tr>
+            <td>".$row["Tool_ID"]."</td>
+            <td>".$row["Toolname"]."</td>
+            <td> ".$row["lab"]."</td>"
+            ?>
 
-
-<!--- end table --->
-
-<!-- The Modal -->
-<div id="myModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close">&times;</span>
-      <h2>Student Record</h2>
-    </div>
-    <div class="modal-body">
-      <p></p>
-      <table>
-        <tr>
-          <th> <h3>Student History </h3></th>
-          <th> <h3>Time Log </h3></th>
-        </tr>
-        <tr>
-          <th> Anthony </th>
-          <th> Date & Time </th>
-        </tr>
-        <tr>
-          <th> Raveena </th>
-          <th> Date & Time </th>
-        </tr>
-        <tr>
-          <th> Jonathan </th>
-          <th> Date & Time </th>
-        </tr>
-        <tr>
-          <th> Farah </th>
-          <th> Date & Time </th>
-        </tr>
-
-        <tr>
-          <th> ... </th>
-          <th> ... </th>
-        </tr>
-          <br>
-          <br>
-      </table>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
+            <td>
+              <div class="container">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">+</button>
 
 </div>
+            </td>
 
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
+            <?php
+            "</tr>";
+        }?>
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+  </tbody>
+</tbody>
+</table>
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-    modal.style.display = "block";
-}
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-}
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Student Record</h4>
+      </div>
+      <div class="modal-body">
+        <p>
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+          <?php
+          $sql2 = "SELECT h.Timestamp, v.User_ID, u.Firstname FROM User u
+                    LEFT JOIN History h ON u.User_ID=h.User_ID
+                    LEFT JOIN Verify v ON v.User_ID=u.User_ID";
 
-</script>
+          $result2 = $conn->query($sql2) or die ($conn->error);
+           ?>
+           <table class = "data-table">
+             <thead>
+               <tr>
+                 <th>UserID</th>
+                 <th>Name</th>
+                 <th>Time Log</th>
+               </tr>
+             </thead>
+             <tbody>
+               <?php
+               while($row2 = $result2->fetch_assoc()){
+                 echo "<tr>
+                 <td>".$row2["User_ID"]."</td>
+                 <td>".$row2["Firstname"]."</td>
+                 <td>".$row2["Timestamp"]."</td></tr>";
+               }
+               ?>
+             </tbody>
+           </table>
 
-<!-- modal ends here -->
+
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 <?php
-
-
+mysqli_close($conn);
 ?>
-
 
 
 </body>
