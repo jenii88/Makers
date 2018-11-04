@@ -1,6 +1,6 @@
 <?php 
  
-$host="localhost";
+$host="http://192.168.64.2";
 $user="root";
 $password="";
 $db="demo";
@@ -37,7 +37,7 @@ if(isset($_POST['username'])){
 
         $_SESSION['login_user'] = $uname; // Initializing Session
        // header("C:\xampp\htdocs\myfiles\login form\links\BootStrap\studentModal.html"); // Redirecting To Profile Page
-        header("location:studentModal.html");
+        header("location:Home/idk.html");
     }
     else{
         $error = "Username or Password is invalid";
