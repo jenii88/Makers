@@ -1,16 +1,8 @@
 <?php
-
-
-	$ID2 = $_POST['ID'];
-	$name2 = $_POST['name'];
-	$equipment2 = $_POST['equipment'];
-
-
 	$dbServername = "localhost";
 	$dbUsername = "root";
 	$dbName = "testing";
 	$conn = mysqli_connect($dbServername,$dbUsername,'','testing');
-
 
 	if(!$conn){
 		echo 'Not connected';
@@ -18,32 +10,53 @@
 
 	if(!mysqli_select_db($conn,'testing'))
 	{
-		echo 'Database not selected';
+		echo 'Databse not selected';
 	}
-	
-	
-	if(isset($_POST['ID'])){
+if(isset($_POST['ID'])){
+	$ID = $_POST['ID'];
+	$Name = $_POST['name'];
+	$Equipment = $_POST['equipment'];
 
-	 $query = "INSERT INTO student (ID,Name,Equipment) VALUES ('$ID2','$name2','$equipment2')" ;
+	$query = "INSERT INTO student (ID,Name,Equipment) VALUES ('$ID','$Name','$Equipment')" ;
+	
 
-	 if (($ID2 != NULL) && (strlen($name2) != 0) && (strlen($equipment2) != 0))
+	if(!mysqli_query($conn,$query))
 	{
-		mysqli_query($conn,$query);
-		
-		
+		echo 'Required';
+	}
+	else{
+	$select_query = "SELECT * FROM employee ORDER BY ID ASC";
+     $result = mysqli_query($conn, $select_query);
+     $output .= '
+      <table id=student_table>  
+                    <<tr> 
+      <br/> 
+      <th>ID</th>
+      <th>Student Name</th> 
+      <th >Equipment</th>
+      </tr>
+
+     ';
+     while($row = mysqli_fetch_array($result))
+     {
+      $output .= '
+       <tr>  
+                         <td>' . $row["ID"] . '</td>  
+                         <td>' . $row["Name"] . '</td> 
+                         <td>' . $row["Equipment"] . '</td> 
+                          
+                    </tr>
+      ';
+     }
+     $output .= '</table>';
+
+		echo $output;
+	
 	}
 
-	// if(mysqli_query($conn,$query))
-	// {
-	// 	// $output .= '<label class="text-success">Data Inserted</label>';
-	// 	echo "Data Inserted";
-	
-	// }
-	// else{
-	// 	echo "Failed";
-	// }
- 
 }
- header("refresh:.1;url=newStudent.php");
-?>
+	
+	header("refresh:0.01;url=newStudent.php");
 
+
+?>

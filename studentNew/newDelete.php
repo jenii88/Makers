@@ -1,16 +1,8 @@
 <?php
-
-
-	$ID2 = $_POST['ID'];
-	$name2 = $_POST['name'];
-	$equipment2 = $_POST['equipment'];
-
-
 	$dbServername = "localhost";
 	$dbUsername = "root";
 	$dbName = "testing";
 	$conn = mysqli_connect($dbServername,$dbUsername,'','testing');
-
 
 	if(!$conn){
 		echo 'Not connected';
@@ -18,22 +10,28 @@
 
 	if(!mysqli_select_db($conn,'testing'))
 	{
-		echo 'Database not selected';
+		echo 'Databse not selected';
 	}
-	
-	
-	if(isset($_POST['ID'])){
+if(isset($_POST['ID'])){
+	$ID = $_POST['ID'];
+	// $Name = $_POST['name'];
+	// $Equipment = $_POST['equipment'];
 
-	 $query = "DELETE FROM student (ID,Name,Equipment) WHERE ('$ID2','$name2','$equipment2')" ;
+	$query = "DELETE FROM student WHERE ID= $ID" ;
 
-	 if (($ID2 != NULL) && (strlen($name2) != 0) && (strlen($equipment2) != 0))
+	if(!mysqli_query($conn,$query))
 	{
-		mysqli_query($conn,$query);
-		
-		
+		echo 'Required';
+	}
+	else{
+
+		echo 'Deleted';
+	
 	}
 
- 
 }
- header("refresh:1;url=newStudent.php");
+	
+	header("refresh:0.01;url=newStudent.php");
+
+
 ?>
