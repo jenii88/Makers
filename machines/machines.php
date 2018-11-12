@@ -15,13 +15,13 @@ $result = mysqli_query($conn, $query);
 <html>
 <head>
    <meta charset="UTF-8">
-	<title>Add/Remove Students</title>
+	<title>Add/Remove Machines</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="student.css">
+  <link rel="stylesheet" type="text/css" href="machine.css">
   <!-- <script src="newStudent.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 
@@ -48,30 +48,30 @@ $result = mysqli_query($conn, $query);
 <br/>
 
   <div>
-  <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#add_data_Modal">ADD STUDENT </button>
-   <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#remove_data_Modal">REMOVE STUDENT</button> 
+  <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#add_data_Modal">ADD MACHINE </button>
+   <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#remove_data_Modal">REMOVE MACHINE</button> 
 </div>
-<div id = student_table>
+<div id = machine_table>
  <table>
       
       <tr> 
       <br/> 
-      <th>ID</th>
-      <th>Student Name</th> 
-      <th >Equipment</th>
+      <th>Machine ID</th>
+      <th>Machine Name</th> 
+      <th >Location</th>
       </tr>
       <?php
         //while($row = $result-> fetch_assoc())
-      $query = "SELECT * FROM student ORDER BY ID ASC";
+      $query = "SELECT * FROM Machine ORDER BY MID ASC";
       $result = mysqli_query($conn, $query);
        while($row = mysqli_fetch_array($result))
       
         {
           ?>
             <tr>
-            <td><?php echo $row['ID']; ?></td>
-            <td><?php echo $row['Name']; ?></td>
-            <td><?php echo $row['Equipment']; ?></td> 
+            <td><?php echo $row['MID']; ?></td>
+            <td><?php echo $row['Mname']; ?></td>
+            <td><?php echo $row['Location']; ?></td> 
             </tr>
         <?php
         }
@@ -115,28 +115,24 @@ $result = mysqli_query($conn, $query);
   <div class="modal-content">
    <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h4 class="modal-title">ADD STUDENT</h4>
+    <h4 class="modal-title">ADD MACHINE</h4>
    </div>
    <div class="modal-body">
      <!-- <form action="newInsert.php" method="post" id="insert_form">  -->
     <form method="post" id="insert_form"> 
 
 
-      <label>Student 1000 ID</label>
-     <input type="text" name="ID" id="ID" class="form-control" />
+      <label>Machine ID</label>
+     <input type="text" name="MID" id="MID" class="form-control" />
      <br />
-     <label>Student Name</label>
-     <input type="text" name="name" id="name" class="form-control" />
+     <label>Machine Name</label>
+     <input type="text" name="Mname" id="Mname" class="form-control" />
      <br />
-     <label>Equipment Name</label>
-     <select name="equipment" id="equipment" class="form-control"> 
-      <option value=" "></option> 
-      <option value="3D Printer">3D Printer</option>  
-      <option value="Chainsaw">Chainsaw</option>
-     </select>
+     <label>Location</label>
+     <input type="text" name="location" id="location" class="form-control" />
      <br />
      
-     <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
+     <input type="submit" name="add" id="add" value="ADD" class="btn btn-success" />
  
     </form>
     <div class="message"></div>
@@ -158,18 +154,14 @@ $result = mysqli_query($conn, $query);
    </div>
    <div class="modal-body">
     <form method="post" id="remove_form">
-    <label>Student 1000 ID</label>
-     <input type="text" name="ID" id="ID" class="form-control" />
+    <label>Machine ID</label>
+     <input type="text" name="MID" id="MID" class="form-control" />
      <br />
-     <label>Student Name</label>
-     <input type="text" name="name" id="name" class="form-control" />
+     <label>Machine Name</label>
+     <input type="text" name="Mname" id="Mname" class="form-control" />
      <br />
-     <label>Equipment Name</label>
-     <select name="equipment" id="equipment" class="form-control">
-      <option value=" "></option> 
-      <option value="3D Printer">3D Printer</option>  
-      <option value="Chainsaw">Chainsaw</option>
-     </select>
+     <label>Location</label>
+     <input type="text" name="location" id="location" class="form-control" />
      <br />
      
      <input type="submit" name="remove" id="remove" value="Remove" class="btn btn-success delete_button" >
@@ -189,22 +181,22 @@ $result = mysqli_query($conn, $query);
      
      //if submit button is clicked
      
-    $('#insert').click(function (event) {       
+    $('#add').click(function (event) {       
       event.preventDefault();
     
       
-      var ID = $('input[name=ID]').val();
-      var name = $('input[name=name]').val();
-      var equipment = $('input[name=equipment]').val();
+      var MID = $('input[name=MID]').val();
+      var Mname = $('input[name=Mname]').val();
+      var location = $('input[name=location]').val();
        
-     if (ID== '' || name == '' || equipment == ''|| equipment == " ") {
+     if (MID== '' || Mname == '' || location == '') {
          alert("Please Fill All Fields");
         }
        else {  
        
       //start the ajax
       $.ajax({
-        url:"newInsert.php",  
+        url:"add.php",  
         method:"POST",  
         data:$('#insert_form').serialize(),  
          // beforeSend:function(){  
@@ -212,10 +204,10 @@ $result = mysqli_query($conn, $query);
          //  }, 
          cache: false, 
         success:function(data){  
-          alert('Data Inserted');
+          alert('Machine Added');
          $('#insert_form').trigger('reset');   
          $('#add_data_Modal').modal('hide'); 
-         $('#student_table').html(data);          
+         $('#machine_table').html(data);          
         }      
       });
        
@@ -239,7 +231,7 @@ $result = mysqli_query($conn, $query);
        
       //start the ajax
       $.ajax({
-        url:"newDelete.php",  
+        url:"remove.php",  
         method:"POST",  
         data:$('#remove_form').serialize(),  
          // beforeSend:function(){  
@@ -247,10 +239,10 @@ $result = mysqli_query($conn, $query);
          //  }, 
          cache: false, 
         success:function(data){  
-          alert('Student Record Deleted');
+          alert('Machine Record Deleted');
          $('#remove_form').trigger('reset');   
          $('#remove_data_Modal').modal('hide'); 
-         $('#student_table').html(data);          
+         $('#machine_table').html(data);          
         }      
       });
        

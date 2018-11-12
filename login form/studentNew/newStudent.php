@@ -39,10 +39,10 @@ $result = mysqli_query($conn, $query);
 		
 
 		 <div class="topnav">
-  			<a href="#home">Home</a>
-  			<a href="#student">Students</a>
-  			<a href="#machine">Machines</a>
-  			<a href="#History">History</a>
+  			<a href="http://192.168.64.2/my_files/login%20form/Home/idk.html#">Home</a>
+  			<a href="http://192.168.64.2/my_files/login%20form/studentNew/newStudent.php">Students</a>
+  			<a href="http://192.168.64.2/my_files/login%20form/machines/machines.php">Machines</a>
+  			<a href="http://192.168.64.2/my_files/login%20form/history.html">History</a>
 		</div> 
 
 <br/>

@@ -10,14 +10,14 @@
 
 	if(!mysqli_select_db($conn,'testing'))
 	{
-		echo 'Databse not selected';
+		echo 'Database not selected';
 	}
-if(isset($_POST['ID'])){
-	$ID = $_POST['ID'];
-	$Name = $_POST['name'];
-	$Equipment = $_POST['equipment'];
+if(isset($_POST['MID'])){
+	$MID = $_POST['MID'];
+	$Mname = $_POST['Mname'];
+	$location = $_POST['location'];
 
-	$query = "INSERT INTO student (ID,Name,Equipment) VALUES ('$ID','$Name','$Equipment')" ;
+	$query = "INSERT INTO Machine (MID,Mname,Location) VALUES ('$MID','$Mname','$location')" ;
 	
 
 	if(!mysqli_query($conn,$query))
@@ -25,15 +25,15 @@ if(isset($_POST['ID'])){
 		echo 'Required';
 	}
 	else{
-	$select_query = "SELECT * FROM employee ORDER BY ID ASC";
+	$select_query = "SELECT * FROM machine ORDER BY MID ASC";
      $result = mysqli_query($conn, $select_query);
      $output .= '
-      <table id=student_table>  
+      <table id=machine_table>  
                     <<tr> 
       <br/> 
-      <th>ID</th>
-      <th>Student Name</th> 
-      <th >Equipment</th>
+      <th>Machine ID</th>
+      <th>Machine Name</th> 
+      <th >Location</th>
       </tr>
 
      ';
@@ -41,9 +41,9 @@ if(isset($_POST['ID'])){
      {
       $output .= '
        <tr>  
-                         <td>' . $row["ID"] . '</td>  
-                         <td>' . $row["Name"] . '</td> 
-                         <td>' . $row["Equipment"] . '</td> 
+                         <td>' . $row["MID"] . '</td>  
+                         <td>' . $row["Mname"] . '</td> 
+                         <td>' . $row["Location"] . '</td> 
                           
                     </tr>
       ';
@@ -56,7 +56,7 @@ if(isset($_POST['ID'])){
 
 }
 	
-	header("refresh:0.01;url=newStudent.php");
+	header("refresh:0.01;url=machine.php");
 
 
 ?>

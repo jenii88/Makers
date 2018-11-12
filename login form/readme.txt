@@ -17,3 +17,5 @@ mysqli connection http://php.net/manual/en/function.mysqli-connect.php
 mysqli queries http://php.net/manual/en/mysqli.query.php
 
 query help https://codeandcoins.blogspot.com/2017/09/login-system-using-php-with-mysql.html
+
+https://www.youtube.com/watch?v=TZJyHbIwjlA - xampp on MacOs how you would expect
