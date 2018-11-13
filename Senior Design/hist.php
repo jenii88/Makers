@@ -18,6 +18,7 @@
     width:70%;
     margin-left:2%;
     margin-right:5%;
+    /* margin-top:10%; */
   }
 
 
@@ -26,30 +27,10 @@
 
 </head>
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class = "navbar-header">
-				 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        			<span class="sr-only">Toggle navigation</span>
-        			<span class="icon-bar"></span>
-       				 <span class="icon-bar"></span>
-        			<span class="icon-bar"></span>
-      			</button>
-      			<a class="brand" href="#"><img src="https://media.nbcdfw.com/images/652*489/uta+university+of+texas+arlington.jpg" /></a>
-
-			</div>
-			<form class="navbar-form navbar-right" role="search">
-  				<div class="form-group">
-    			<input type="text" class="form-control" placeholder="Search">
-  				</div>
-  				<button type="submit" class="btn btn-default">Submit</button>
-			</form>
-
-		</div>
-		</nav>
-
-
-  <!--- header & design for website starts here --->
+  <!--- Code for the layout of the page, referencing student.css above in the scripts as well --->
+  <header>
+      <img src="https://www.uta.edu/_templates/_images/responsive/uta-logo-main.png" >
+    </header>
 
 
   		 <div class="topnav">
@@ -58,6 +39,7 @@
     			<a href="#machine">Machines</a>
     			<a href="#History">History</a>
   		</div>
+
 
 <!--- header &design for website ends here --->
 
@@ -120,8 +102,9 @@ $result = $conn->query($sql);
 </tbody>
 </table>
 </div>
+<!--- table code ends here --->
 
-<!-- Modal -->
+<!-- Modal + table 2 starts here -->
 <div id="id01" class="w3-modal w3-animate-opacity">
   <div class="w3-modal-content w3-card-4">
     <header class="w3-container w3-blue">
@@ -135,7 +118,7 @@ $result = $conn->query($sql);
           $sql2 = "SELECT h.Timestamp, v.User_ID, u.Firstname FROM User u
                     LEFT JOIN History h ON u.User_ID=h.User_ID
                     LEFT JOIN Verify v ON v.User_ID=u.User_ID
-                    WHERE h.TOOL_ID=1";
+                    WHERE h.TOOL_ID=1"; // hard coded the Tool_ID = 1, need to grab this unit from button in table 1
 
           $result2 = $conn->query($sql2) or die ($conn->error);
            ?>
@@ -152,13 +135,12 @@ $result = $conn->query($sql);
                <?php
                while($row2 = $result2->fetch_assoc()){
                  echo "<tr>
-                 <td>".$row2["User_ID"]."</td>
-                 <td>".$row2["Firstname"]."</td>
-                 <td>";if ($row2["Timestamp"]==NULL) {
-                        echo "Currently in use.";
-                      }else {
-                        echo $row2["Timestamp"]."</td></tr>";
-                      }
+                 <td>".$row2["User_ID"]."</td><td>".$row2["Firstname"]."</td><td>";
+                 if ($row2["Timestamp"]==NULL) {
+                   echo "CURRENTLY IN USE";
+                 }else {
+                   echo $row2["Timestamp"]."</td></tr>";
+                 }
                }
                ?>
              </tbody>
@@ -172,7 +154,34 @@ $result = $conn->query($sql);
 <?php
 mysqli_close($conn);
 ?>
+<!-- TABLE 2 ENDS HERE, CLOSE CONNECTION TO DATABASE --->
 
+<!-- footer code starts here -->
+
+<div class="footer">
+        		<div class="col-sm-4 text-center">
+        			<br />
+           		 <p><a href="#" class="about">About Us</a></p>
+
+
+           		 </div>
+            	<div class="col-sm-4 text-center border-left">
+
+              	<br />
+               	<a href="#" class="about">Staff Login</a>
+           		</div>
+           		<div class="col-sm-4 col-xs-12 text-center border-left">
+            		<h5 class="ft-text-title">Follow Us:</h5>
+            		<div class="pspt-dtls">
+                		<a href="#" class="about">FACEBOOK | </a>
+               			 <a href="#" class="about">TWITTER | </a>
+                		<a href="#" class="about">INSTAGRAM</a>
+               			 <br><br><br><br><br><br><br>
+            		</div>
+       			 </div>
+
+		</div>
+<!-- footer code ends here --->
 
 </body>
 </html>
