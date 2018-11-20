@@ -14,18 +14,21 @@
 	}
 if(isset($_POST['SID'])){
 	$SID = $_POST['SID'];
+	$MID = $_POST['MID'];
+
 	// $Name = $_POST['name'];
 	// $Equipment = $_POST['equipment'];
 
-	$query = "DELETE FROM student WHERE SID= $SID" ;
+	$query = "DELETE FROM access WHERE S_ID= $SID AND M_ID= $MID" ;
 
-	if(!mysqli_query($conn,$query))
+	if(mysqli_query($conn,$query))
 	{
-		echo 'Required';
+		
+		echo 'Access Removed ';
 	}
 	else{
 
-		echo 'Deleted';
+		echo 'All Fields Required';
 	
 	}
 

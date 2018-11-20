@@ -6,7 +6,7 @@ $dbUsername = "root";
 
 
 $conn = mysqli_connect($dbServername,$dbUsername,'','testing');
-$query = "SELECT * FROM student ORDER BY ID DESC";
+$query = "SELECT * FROM student ORDER BY SID DESC";
 $result = mysqli_query($conn, $query);
 
  ?>  
@@ -37,7 +37,7 @@ $result = mysqli_query($conn, $query);
     <img src="https://www.uta.edu/_templates/_images/responsive/uta-logo-main.png" >
   </header>
 		
-
+  <!-- Navar starts here -->
 		 <div class="topnav">
   			<a href="#home">Home</a>
   			<a href="#student">Students</a>
@@ -46,32 +46,37 @@ $result = mysqli_query($conn, $query);
 		</div> 
 
 <br/>
-
+	
+<!-- Add and remove buttons -->
   <div>
   <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#add_data_Modal">ADD STUDENT </button>
-   <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#remove_data_Modal">REMOVE STUDENT</button> 
+   <button type="button" class="btn btn-default " data-toggle = "modal" data-target="#remove_data_Modal">REMOVE STUDENT</button>
+   <button type="button" class="btn btn-default btn_right" data-toggle = "modal" data-target="#remove_access_Modal">REMOVE ACCESS</button>  
+   <button type="button" class="btn btn-default btn_right " data-toggle = "modal" data-target="#add_access_Modal">ADD ACCESS </button>
+   
 </div>
+<!-- Table starts here -->
 <div id = student_table>
  <table>
       
       <tr> 
       <br/> 
-      <th>ID</th>
-      <th>Student Name</th> 
-      <th >Equipment</th>
+      <th>SID</th>
+      <th>Firstname</th> 
+      <th >Lastname</th>
       </tr>
       <?php
         //while($row = $result-> fetch_assoc())
-      $query = "SELECT * FROM student ORDER BY ID ASC";
+      $query = "SELECT * FROM student ORDER BY SID ASC";
       $result = mysqli_query($conn, $query);
        while($row = mysqli_fetch_array($result))
       
         {
           ?>
             <tr>
-            <td><?php echo $row['ID']; ?></td>
-            <td><?php echo $row['Name']; ?></td>
-            <td><?php echo $row['Equipment']; ?></td> 
+            <td><?php echo $row['SID']; ?></td>
+            <td><?php echo $row['Firstname']; ?></td>
+            <td><?php echo $row['Lastname']; ?></td> 
             </tr>
         <?php
         }
@@ -82,7 +87,7 @@ $result = mysqli_query($conn, $query);
 
 
 <!-- 
-	<div class="container-fluid">  --> 
+	<The footer for tha page   --> 
     	<div class="footer"> 
         		<div class="col-sm-4 text-center">
         			<br />
@@ -109,7 +114,7 @@ $result = mysqli_query($conn, $query);
 </body>
 </html>
 
-
+ <!-- Code for the modal to add student -->
 <div id="add_data_Modal" class="modal fade">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -123,17 +128,14 @@ $result = mysqli_query($conn, $query);
 
 
       <label>Student 1000 ID</label>
-     <input type="text" name="ID" id="ID" class="form-control" />
+     <input type="text" name="SID" id="SID" class="form-control" />
      <br />
-     <label>Student Name</label>
-     <input type="text" name="name" id="name" class="form-control" />
+     <label>First Name</label>
+     <input type="text" name="Firstname" id="Firstname" class="form-control" />
      <br />
-     <label>Equipment Name</label>
-     <select name="equipment" id="equipment" class="form-control"> 
-      <option value=" "></option> 
-      <option value="3D Printer">3D Printer</option>  
-      <option value="Chainsaw">Chainsaw</option>
-     </select>
+     <label>Last Name</label>
+     <input type="text" name="Lastname" id="Lastname" class="form-control" />
+     
      <br />
      
      <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />
@@ -149,6 +151,7 @@ $result = mysqli_query($conn, $query);
  </div>
 </div>
 
+ <!-- Code for the modal to remove student -->
 <div id="remove_data_Modal" class="modal fade">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -159,17 +162,14 @@ $result = mysqli_query($conn, $query);
    <div class="modal-body">
     <form method="post" id="remove_form">
     <label>Student 1000 ID</label>
-     <input type="text" name="ID" id="ID" class="form-control" />
+     <input type="text" name="SID" id="SID" class="form-control" />
      <br />
      <label>Student Name</label>
-     <input type="text" name="name" id="name" class="form-control" />
+     <input type="text" name="Firstname" id="Firstname" class="form-control" />
      <br />
-     <label>Equipment Name</label>
-     <select name="equipment" id="equipment" class="form-control">
-      <option value=" "></option> 
-      <option value="3D Printer">3D Printer</option>  
-      <option value="Chainsaw">Chainsaw</option>
-     </select>
+     <label>Last Name</label>
+     <input type="text" name="Lastname" id="Lastname" class="form-control" />
+    
      <br />
      
      <input type="submit" name="remove" id="remove" value="Remove" class="btn btn-success delete_button" >
@@ -182,6 +182,70 @@ $result = mysqli_query($conn, $query);
   </div>
  </div>
 
+<!-- MOdal Code to Grant student an access to a machine -->
+ <div id="add_access_Modal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">ADD ACCESS</h4>
+   </div>
+   <div class="modal-body">
+     <!-- <form action="newInsert.php" method="post" id="insert_form">  -->
+    <form method="post" id="access_form"> 
+
+
+     <label>Student ID</label>
+     <input type="text" name="SID" id="SID" class="form-control" />
+     <br />
+     <label>Machine ID</label>
+     <input type="text" name="MID" id="MID" class="form-control" />
+  
+     
+     <br />
+     
+     <input type="submit" name="access_insert" id="access_insert" value="Insert" class="btn btn-success" />
+ 
+    </form>
+  
+  
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+   </div>
+  </div>
+ </div>
+</div>
+
+ <!-- Code for the modal to remove access of student -->
+<div id="remove_access_Modal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">REMOVE ACCESS</h4>
+   </div>
+   <div class="modal-body">
+    <form method="post" id="removeaccess_form">
+     <label>Student ID</label>
+     <input type="text" name="SID" id="SID" class="form-control" />
+     <br />
+     <label>Machine ID</label>
+     <input type="text" name="MID" id="MID" class="form-control" />
+    
+     <br />
+     
+     <input type="submit" name="remove_access" id="remove_access" value="Remove" class="btn btn-success delete_button" >
+    </form>
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+   </div>
+  </div>
+ </div>
+
+
 <script>
     $(document).ready(function() {
       
@@ -193,11 +257,11 @@ $result = mysqli_query($conn, $query);
       event.preventDefault();
     
       
-      var ID = $('input[name=ID]').val();
-      var name = $('input[name=name]').val();
-      var equipment = $('input[name=equipment]').val();
+      var SID = $('input[name=SID]').val();
+      var Firstname = $('input[name=Firstname]').val();
+      var Lastname = $('input[name=Lastname]').val();
        
-     if (ID== '' || name == '' || equipment == ''|| equipment == " ") {
+     if (SID== '' || Firstname == '' || Lastname == '') {
          alert("Please Fill All Fields");
         }
        else {  
@@ -264,3 +328,95 @@ $result = mysqli_query($conn, $query);
  
  </script>
 
+<!-- script for add access -->
+<script>
+    $(document).ready(function() {
+      
+     //if submit button is clicked
+     
+    $('#access_insert').click(function (event) {       
+      event.preventDefault();
+    
+      
+      var SID = $('input[name=SID]').val();
+      var MID = $('input[name=MID]').val();
+     
+       // empty field not working
+     // if (SID == '' || MID == '') {
+     //     alert("Please Fill All Fields");
+     //    }
+     //   else {  
+       
+      //start the ajax
+      $.ajax({
+        url:"addAccess.php",  
+        method:"POST",  
+        data:$('#access_form').serialize(),  
+         // beforeSend:function(){  
+         //  $('#insert').val("Inserting");  
+         //  }, 
+         cache: false, 
+        success:function(data){  
+         // alert('Student has been added to the Machine.');
+         alert(data);
+         $('#access_form').trigger('reset');   
+         $('#add_access_Modal').modal('hide'); 
+         // $('#student_table').html(data);          
+        }      
+      });
+       
+      //cancel the submit button default behaviours
+      //return false;
+    // }
+    });
+
+}); 
+ 
+ 
+ </script>
+
+ <script>
+    $(document).ready(function() {
+      
+     //if submit button is clicked
+     
+    $('#remove_access').click(function (event) {       
+      event.preventDefault();
+    
+      
+      // var SID = $('input[name=SID]').val();
+      // var MID = $('input[name=MID]').val();
+     
+       // empty field not working
+     // if (SID == '' || MID == '') {
+     //     alert("Please Fill All Fields");
+     //    }
+     //   else {  
+       
+      //start the ajax
+      $.ajax({
+        url:"removeAccess.php",  
+        method:"POST",  
+        data:$('#removeaccess_form').serialize(),  
+         // beforeSend:function(){  
+         //  $('#insert').val("Inserting");  
+         //  }, 
+         cache: false, 
+        success:function(data){  
+         // alert('Student has been added to the Machine.');
+         alert(data);
+         $('#removeaccess_form').trigger('reset');   
+         $('#remove_access_Modal').modal('hide'); 
+         // $('#student_table').html(data);          
+        }      
+      });
+       
+      //cancel the submit button default behaviours
+      //return false;
+    // }
+    });
+
+}); 
+ 
+ 
+ </script>

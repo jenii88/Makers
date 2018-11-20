@@ -21,6 +21,8 @@ body{
 	background: #EEEEEE;
 }
 
+.btn_right {float: right;}
+
 .footer{
 
 	position: fixed;

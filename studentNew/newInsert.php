@@ -10,14 +10,14 @@
 
 	if(!mysqli_select_db($conn,'testing'))
 	{
-		echo 'Databse not selected';
+		echo 'Database not selected';
 	}
-if(isset($_POST['ID'])){
-	$ID = $_POST['ID'];
-	$Name = $_POST['name'];
-	$Equipment = $_POST['equipment'];
+if(isset($_POST['SID'])){
+	$SID = $_POST['SID'];
+	$Firstname = $_POST['Firstname'];
+	$Lastname = $_POST['Lastname'];
 
-	$query = "INSERT INTO student (ID,Name,Equipment) VALUES ('$ID','$Name','$Equipment')" ;
+	$query = "INSERT INTO student (SID,Firstname,Lastname) VALUES ('$SID','$Firstname','$Lastname')" ;
 	
 
 	if(!mysqli_query($conn,$query))
@@ -25,15 +25,15 @@ if(isset($_POST['ID'])){
 		echo 'Required';
 	}
 	else{
-	$select_query = "SELECT * FROM employee ORDER BY ID ASC";
+	$select_query = "SELECT * FROM student ORDER BY SID ASC";
      $result = mysqli_query($conn, $select_query);
      $output .= '
       <table id=student_table>  
                     <<tr> 
       <br/> 
-      <th>ID</th>
-      <th>Student Name</th> 
-      <th >Equipment</th>
+      <th>SID</th>
+      <th>Firstname</th> 
+      <th >Lastname</th>
       </tr>
 
      ';
@@ -41,9 +41,9 @@ if(isset($_POST['ID'])){
      {
       $output .= '
        <tr>  
-                         <td>' . $row["ID"] . '</td>  
-                         <td>' . $row["Name"] . '</td> 
-                         <td>' . $row["Equipment"] . '</td> 
+                         <td>' . $row["SID"] . '</td>  
+                         <td>' . $row["Firstname"] . '</td> 
+                         <td>' . $row["Lastname"] . '</td> 
                           
                     </tr>
       ';
@@ -56,7 +56,7 @@ if(isset($_POST['ID'])){
 
 }
 	
-	header("refresh:0.01;url=newStudent.php");
+	header("refresh:5s;url=newStudent.php");
 
 
 ?>
