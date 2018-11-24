@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- <script language="javascript" type="text/javascript">
+        window.history.forward();
+        
+    </script> -->
+
+
+
+      <script language="javascript" type="text/javascript">
+
+        window.history.forward();
+
+        //window.history.forward();
+        //window.location.replace("http://192.168.64.2/my_files/Makerspace/home/homepage2.html");
+
+       if(performance.navigation.type == 2){
+   location.reload(true);
+}
+       
+   
+
+        
+    </script>  
 <title>MakerSpace Homepage</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -202,6 +224,7 @@
 <footer class="container footer-padding w3-center">
   <div class="w3-xlarge w3-section">
     <h3>UTA MakerSpace </h3>
+    <a href="http://192.168.64.2/my_files/Makerspace/index.php">Sign Out</a>
     <div class = "btn" >About</div>
     <div class = "btn">Contact Us</div>
 
@@ -229,6 +252,24 @@ function carousel() {
 }
 
 </script>
+
+<!-- <script>
+    $(document).ready(function() {
+      
+       
+     
+     //if submit button is clicked
+     
+    $('#selector').click(function (event) {       
+      event.preventDefault();
+
+      location.reload();
+
+
+    }); 
+ 
+ 
+ </script> -->
 
 </body>
 </html>

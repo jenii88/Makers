@@ -1,3 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+   <script language="javascript" type="text/javascript">
+
+        window.history.forward();
+        //window.location.replace("http://192.168.64.2/my_files/Makerspace/home/homepage2.html");
+
+
+   
+       if(performance.navigation.type == 2){
+   location.reload(true);
+}
+       
+   
+
+        
+    </script>  
+
+ <title> Login </title>
+ <link rel="stylesheet" a href=".\style.css">
+ <link rel="stylesheet" a href="css\font-awesome.min.css">
+</head>
+<body>
+    <div class="container">
+        <img src="./logo.jpg">
+        <form method="POST" action="#">
+            <div class="form-input">
+                <input type="text" name="username" placeholder="Enter the User Name"/> <!-- is it supposed to be username? -->
+            </div>
+            <div class="form-input">
+                <input type="password" name="password" placeholder="password"/>
+            </div>
+            <input type="submit" type="submit" value="LOGIN" class="btn-login"/>
+            </form>
+        </div>
+</body>
+</html>
+
 <?php 
  
 $host="http://192.168.64.2";
@@ -38,33 +78,22 @@ if(isset($_POST['username'])){
         $_SESSION['login_user'] = $uname; // Initializing Session
        // header("C:\xampp\htdocs\myfiles\login form\links\BootStrap\studentModal.html"); // Redirecting To Profile Page
         header("location:home/homepage.html");
+
+        
     }
     else{
         $error = "Username or Password is invalid";
+       // echo $error;
+        echo '<p style="text-align:center; 
+        color:red;" >Username or Password is Invalid!</p>';
     }
+
+
+        // if(!isset($_SESSION['login_user'])){
+        //     header("Location:home/homepage2.html");
+        //     exit;
+        //         }
         
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
- <title> Login </title>
- <link rel="stylesheet" a href=".\style.css">
- <link rel="stylesheet" a href="css\font-awesome.min.css">
-</head>
-<body>
-    <div class="container">
-        <img src="./logo.jpg">
-        <form method="POST" action="#">
-            <div class="form-input">
-                <input type="text" name="username" placeholder="Enter the User Name"/> <!-- is it supposed to be username? -->
-            </div>
-            <div class="form-input">
-                <input type="password" name="password" placeholder="password"/>
-            </div>
-            <input type="submit" type="submit" value="LOGIN" class="btn-login"/>
-            </form>
-        </div>
-</body>
-</html>
