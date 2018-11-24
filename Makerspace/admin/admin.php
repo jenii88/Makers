@@ -100,7 +100,7 @@ $conn = mysqli_connect($dbServername,$dbUsername,'','testing');
               <div class="col-sm-4 text-center border-left">
           
                 <br />
-                <a href="#" class="about">Staff Login</a>
+               
               </div>
               <div class="col-sm-4 col-xs-12 text-center border-left">
                 <h5 class="ft-text-title">Follow Us:</h5>
